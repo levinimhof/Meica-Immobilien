@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#26231F"/>
+      <stop offset="1" stop-color="#3E382F"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.72" cy="0.2" r="0.9">
+      <stop offset="0" stop-color="#C9A96A" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#C9A96A" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <rect width="1600" height="1000" fill="url(#glow)"/>
+  
+    <polyline points="300,720 300,430 620,240 940,430 940,720" fill="none" stroke="#C9A96A" stroke-width="3" opacity="0.9"/>
+    <line x1="180" y1="720" x2="1420" y2="720" stroke="#C9A96A" stroke-width="2" opacity="0.7"/>
+    <rect x="400" y="480" width="90" height="110" fill="none" stroke="#C9A96A" stroke-width="2" opacity="0.55"/><rect x="530" y="480" width="90" height="110" fill="none" stroke="#C9A96A" stroke-width="2" opacity="0.55"/><rect x="660" y="480" width="90" height="110" fill="none" stroke="#C9A96A" stroke-width="2" opacity="0.55"/><rect x="400" y="630" width="90" height="110" fill="none" stroke="#C9A96A" stroke-width="2" opacity="0.55"/><rect x="530" y="630" width="90" height="110" fill="none" stroke="#C9A96A" stroke-width="2" opacity="0.55"/><rect x="660" y="630" width="90" height="110" fill="none" stroke="#C9A96A" stroke-width="2" opacity="0.55"/>
+    <rect x="1040" y="500" width="260" height="220" fill="none" stroke="#C9A96A" stroke-width="2" opacity="0.4"/>
+    <circle cx="1240" cy="300" r="70" fill="none" stroke="#C9A96A" stroke-width="2" opacity="0.35"/>
+</svg>

@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #201e1b;
+  --ink-soft: #33302a;
+  --ivory: #faf8f4;
+  --paper: #ffffff;
+  --bronze: #a5804a;
+  --bronze-deep: #85652f;
+  --bronze-light: #c9a96a;
+  --stone: #625c50;
+  --line: #e6e1d6;
+  --line-dark: #45403687;
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ivory: var(--ivory);
+  --color-paper: var(--paper);
+  --color-bronze: var(--bronze);
+  --color-bronze-deep: var(--bronze-deep);
+  --color-bronze-light: var(--bronze-light);
+  --color-stone: var(--stone);
+  --color-line: var(--line);
+  --font-display: var(--font-cinzel);
+  --font-sans: var(--font-josefin);
+}
+
+body {
+  background: var(--ivory);
+  color: var(--ink);
+  font-family: var(--font-josefin), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--bronze-light);
+  color: var(--ink);
+}
+
+/* Subtle upward reveal used on section entrances */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-rise {
+  animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-rise {
+    animation: none;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}
