@@ -1,6 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
+import LampSection from "@/components/lamp-section";
+import Parallax from "@/components/parallax";
 import PropertyCard from "@/components/property-card";
+import Tilt from "@/components/tilt";
 import { getFeaturedProperties } from "@/lib/properties";
 
 const services = [
@@ -40,14 +43,16 @@ export default function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="relative flex min-h-dvh items-center bg-ink text-ivory">
-        <Image
-          src="/images/hero.svg"
-          alt=""
-          fill
-          priority
-          className="object-cover opacity-90"
-        />
+      <section className="relative flex min-h-dvh items-center overflow-hidden bg-ink text-ivory">
+        <Parallax amount={160} className="absolute inset-0">
+          <Image
+            src="/images/hero.svg"
+            alt=""
+            fill
+            priority
+            className="scale-110 object-cover opacity-90"
+          />
+        </Parallax>
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-ink/20" />
         <div className="relative mx-auto w-full max-w-7xl px-6 pb-24 pt-40 lg:px-10">
           <p className="animate-rise text-xs uppercase tracking-[0.35em] text-bronze-light">
@@ -106,10 +111,15 @@ export default function Home() {
         </div>
         <div className="mt-12 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
           {featured.map((p) => (
-            <PropertyCard key={p.slug} property={p} />
+            <Tilt key={p.slug}>
+              <PropertyCard property={p} />
+            </Tilt>
           ))}
         </div>
       </section>
+
+      {/* Slogan — lamp scroll reveal */}
+      <LampSection />
 
       {/* Services */}
       <section className="bg-ink text-ivory">

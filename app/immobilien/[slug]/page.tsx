@@ -41,9 +41,16 @@ export default async function PropertyPage({
   const facts: [string, string][] = [
     ["Objektart", property.type],
     ["Angebot", property.offer === "kauf" ? "Kauf" : "Miete"],
-    ["Ort", `${property.zip} ${property.location}`],
+    [
+      "Ort",
+      property.address
+        ? `${property.address}, ${property.zip} ${property.location}`
+        : `${property.zip} ${property.location}`,
+    ],
     ["Zimmer", String(property.rooms)],
-    ["Wohnfläche", `${property.livingSpace} m²`],
+    ...(property.livingSpace
+      ? ([["Wohnfläche", `${property.livingSpace} m²`]] as [string, string][])
+      : []),
     ...(property.plotSize
       ? ([["Grundstück", `${property.plotSize} m²`]] as [string, string][])
       : []),
@@ -52,6 +59,9 @@ export default async function PropertyPage({
       : []),
     ...(property.yearBuilt
       ? ([["Baujahr", String(property.yearBuilt)]] as [string, string][])
+      : []),
+    ...(property.renovated
+      ? ([["Renoviert", String(property.renovated)]] as [string, string][])
       : []),
     ["Verfügbar", property.available],
   ];
@@ -110,6 +120,30 @@ export default async function PropertyPage({
               ))}
             </div>
 
+            {property.gallery && property.gallery.length > 0 && (
+              <>
+                <h2 className="mt-14 font-display text-xl">Impressionen</h2>
+                <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                  {property.gallery.map((src, i) => (
+                    <div
+                      key={src}
+                      className={`relative overflow-hidden ring-1 ring-line ${
+                        i === 0 ? "sm:col-span-2 aspect-[16/9]" : "aspect-[4/3]"
+                      }`}
+                    >
+                      <Image
+                        src={src}
+                        alt={`${property.title} — Bild ${i + 1}`}
+                        fill
+                        sizes="(max-width: 640px) 100vw, 50vw"
+                        className="object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
+
             <h2 className="mt-14 font-display text-xl">Das zeichnet dieses Objekt aus</h2>
             <ul className="mt-6 grid gap-x-10 gap-y-3 sm:grid-cols-2">
               {property.features.map((f) => (
@@ -144,6 +178,16 @@ export default async function PropertyPage({
                   </div>
                 ))}
               </dl>
+              {property.sourceUrl && (
+                <a
+                  href={property.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-5 inline-block border-b border-bronze pb-1 text-xs uppercase tracking-[0.22em] text-bronze-deep transition-colors hover:text-ink"
+                >
+                  Inserat auf Homegate ansehen
+                </a>
+              )}
             </div>
 
             <div className="bg-ink p-8 text-ivory">

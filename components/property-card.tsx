@@ -37,7 +37,8 @@ export default function PropertyCard({ property }: { property: Property }) {
         </h3>
         <div className="mt-5 flex items-end justify-between border-t border-line pt-4">
           <p className="text-sm font-light text-stone">
-            {property.rooms} Zimmer · {property.livingSpace} m²
+            {property.rooms} Zimmer
+            {property.livingSpace ? ` · ${property.livingSpace} m²` : ""}
           </p>
           <p className="font-medium tracking-wide text-bronze-deep">
             {formatPrice(property)}

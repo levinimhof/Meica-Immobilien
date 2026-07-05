@@ -25,12 +25,14 @@ npm run lint
 
 ## Inhalte pflegen
 
-- **Objekte:** `lib/properties.ts` — aktuell **Beispieldaten**. Echte Objekte dort
-  eintragen oder später an eine Datenbank (z. B. Supabase) anbinden; alle Seiten
-  lesen ausschliesslich aus diesem Modul.
-- **Objektbilder:** `public/images/*.svg` sind generierte Platzhalter-Visuals.
-  Echte Fotos unter gleichem Pfad ablegen und die `image`-Felder in
-  `lib/properties.ts` anpassen.
+- **Objekte:** `lib/properties.ts` — enthält die aktuellen Miet-Inserate der
+  MEICA Immobilien AG (mit `sourceUrl` zum Homegate-Inserat). Angaben bei
+  Änderungen dort nachführen; alle Seiten lesen ausschliesslich aus diesem Modul.
+- **Objektfotos:** `npm run import:listings` **lokal** ausführen — das Skript
+  lädt die Fotos der Homegate-Inserate nach `public/images/listings/<slug>/`
+  und gibt die passenden `image`/`gallery`-Einträge aus. (In der Cloud-Sandbox
+  ist homegate.ch netzwerkseitig gesperrt, darum lokal.) Alternativ Fotos
+  manuell dort ablegen. Bis dahin dienen die SVG-Visuals als Cover.
 - **Logo:** Aktuell Wortmarke (Cinzel). Kundenlogo in `components/navbar.tsx`
   und `components/footer.tsx` einsetzen.
 - **Kontaktformular:** Öffnet derzeit das Mailprogramm (`mailto:`), da kein

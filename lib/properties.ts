@@ -1,7 +1,10 @@
-// Objektdaten für das Immobilienportal.
-// HINWEIS: Dies sind Beispieldaten. Echte Objekte hier eintragen oder später
-// an eine Datenbank (z. B. Supabase) anbinden — die Seiten lesen nur aus
-// diesem Modul (getProperties / getPropertyBySlug).
+// Objektdaten für das Immobilienportal — aktuelle Miet-Inserate der
+// MEICA Immobilien AG (Quelle: Homegate/ImmoScout24, siehe sourceUrl).
+//
+// BILDER: Echte Objektfotos mit `npm run import:listings` von Homegate
+// herunterladen (lokal ausführen, siehe scripts/import-homegate.mjs) oder
+// manuell unter public/images/listings/<slug>/ ablegen und unten in
+// `image`/`gallery` eintragen. Bis dahin dienen die SVG-Visuals als Cover.
 
 export type Offer = "kauf" | "miete";
 
@@ -12,15 +15,19 @@ export type Property = {
   offer: Offer;
   location: string;
   zip: string;
+  address?: string;
   price: number; // CHF; bei Miete pro Monat
   rooms: number;
-  livingSpace: number; // m²
+  livingSpace?: number; // m²
   plotSize?: number; // m²
   floor?: string;
   yearBuilt?: number;
+  renovated?: number;
   available: string;
   status?: "Neu" | "Reserviert";
   image: string;
+  gallery?: string[];
+  sourceUrl?: string;
   excerpt: string;
   description: string[];
   features: string[];
@@ -28,184 +35,97 @@ export type Property = {
 
 export const properties: Property[] = [
   {
-    slug: "einfamilienhaus-balsthal",
-    title: "Charmantes 5.5-Zimmer-Einfamilienhaus mit Garten",
-    type: "Einfamilienhaus",
-    offer: "kauf",
-    location: "Balsthal",
-    zip: "4710",
-    price: 895_000,
-    rooms: 5.5,
-    livingSpace: 168,
-    plotSize: 520,
-    yearBuilt: 1998,
-    available: "Nach Vereinbarung",
-    status: "Neu",
-    image: "/images/haus-balsthal.svg",
-    excerpt:
-      "Grosszügiges Familienhaus an ruhiger Lage mit gepflegtem Garten, Doppelgarage und Blick ins Grüne.",
-    description: [
-      "An bevorzugter, ruhiger Wohnlage in Balsthal steht dieses gepflegte Einfamilienhaus mit 5.5 Zimmern. Der durchdachte Grundriss verbindet einen offenen Wohn- und Essbereich mit direktem Gartenzugang.",
-      "Im Obergeschoss befinden sich drei Schlafzimmer sowie ein modernes Badezimmer mit Badewanne und separater Dusche. Das ausgebaute Dachgeschoss bietet Raum für ein Home-Office oder ein zusätzliches Gästezimmer.",
-      "Der gepflegte Garten mit Sitzplatz ist nach Südwesten ausgerichtet. Eine Doppelgarage und zwei Aussenparkplätze runden das Angebot ab.",
-    ],
-    features: [
-      "Ruhige, familienfreundliche Lage",
-      "Offener Wohn-/Essbereich mit Gartenzugang",
-      "Ausgebautes Dachgeschoss",
-      "Doppelgarage + 2 Aussenparkplätze",
-      "Südwest-Garten mit Sitzplatz",
-      "Cheminée im Wohnzimmer",
-    ],
-  },
-  {
-    slug: "wohnung-balsthal",
-    title: "Helle 3.5-Zimmer-Wohnung mit grossem Balkon",
+    // Homegate-Inserat 4003286318 — Angaben bitte gegen das Inserat prüfen.
+    slug: "wohnung-muehlegasse-balsthal",
+    title: "Charmante 4.5-Zimmer-Wohnung im Zentrum",
     type: "Wohnung",
     offer: "miete",
     location: "Balsthal",
     zip: "4710",
-    price: 1_590,
-    rooms: 3.5,
-    livingSpace: 82,
-    floor: "2. Obergeschoss",
-    yearBuilt: 2015,
-    available: "01.10.2026",
-    image: "/images/wohnung-balsthal.svg",
-    excerpt:
-      "Moderne Wohnung im 2. OG mit offener Küche, grossem Balkon und Lift — zentral und dennoch ruhig gelegen.",
-    description: [
-      "Diese helle 3.5-Zimmer-Wohnung liegt im 2. Obergeschoss eines gepflegten Mehrfamilienhauses mit Lift, wenige Gehminuten vom Zentrum von Balsthal entfernt.",
-      "Die offene Küche ist mit Glaskeramikherd, Geschirrspüler und viel Stauraum ausgestattet. Vom Wohnzimmer gelangen Sie auf den grossen, gedeckten Balkon mit Abendsonne.",
-      "Ein Kellerabteil gehört zur Wohnung; ein Einstellhallenplatz kann für CHF 120.– pro Monat dazugemietet werden.",
-    ],
-    features: [
-      "Grosser gedeckter Balkon (Westausrichtung)",
-      "Offene, moderne Küche",
-      "Lift im Haus",
-      "Eigener Waschturm in der Wohnung",
-      "Kellerabteil inklusive",
-      "Einstellhallenplatz zumietbar",
-    ],
-  },
-  {
-    slug: "maisonette-oensingen",
-    title: "Stilvolle 4.5-Zimmer-Maisonette-Wohnung",
-    type: "Maisonette",
-    offer: "kauf",
-    location: "Oensingen",
-    zip: "4702",
-    price: 745_000,
+    address: "Mühlegasse 1",
+    price: 1_860,
     rooms: 4.5,
     livingSpace: 128,
-    floor: "2./3. Obergeschoss",
-    yearBuilt: 2009,
+    renovated: 2020,
     available: "Nach Vereinbarung",
-    image: "/images/maisonette-oensingen.svg",
+    status: "Neu",
+    image: "/images/wohnung-balsthal.svg",
+    sourceUrl: "https://www.homegate.ch/mieten/4003286318",
     excerpt:
-      "Wohnen auf zwei Etagen: grosszügige Maisonette mit Galerie, zwei Nasszellen und Blick Richtung Jura.",
+      "Grosszügige, 2020 renovierte Wohnung mit 128 m² Wohnfläche an der Mühlegasse — mitten im Zentrum von Balsthal.",
     description: [
-      "Diese stilvolle Maisonette-Wohnung überzeugt durch ihre grosszügige Raumaufteilung über zwei Etagen und den unverbaubaren Blick Richtung Jurakette.",
-      "Im unteren Geschoss befinden sich der offene Wohn- und Essbereich mit moderner Küche sowie ein Zimmer und eine Dusche/WC. Über die elegante Treppe erreichen Sie die Galerie und zwei weitere Schlafzimmer mit Bad/WC.",
-      "Oensingen bietet mit direktem Autobahnanschluss und SBB-Station eine ausgezeichnete Verkehrsanbindung — ideal für Pendlerinnen und Pendler.",
+      "Im Herzen von Balsthal, nur wenige Schritte vom Dorfzentrum entfernt, vermieten wir diese charmante 4.5-Zimmer-Wohnung an der Mühlegasse 1.",
+      "Die Wohnung wurde 2020 umfassend renoviert und verbindet den Charakter des Hauses mit modernem Wohnkomfort: helle Räume, eine zeitgemässe Küche und gepflegte Nasszellen.",
+      "Mit rund 128 m² Wohnfläche bietet sie viel Platz für Familien oder Paare, die grosszügig wohnen möchten. Einkaufsmöglichkeiten, Schulen und der öffentliche Verkehr sind in Gehdistanz.",
     ],
     features: [
-      "Wohnen auf zwei Etagen mit Galerie",
-      "Zwei Nasszellen",
-      "Unverbaubarer Jurablick",
-      "Ausgezeichnete Verkehrsanbindung (A1/SBB)",
-      "Réduit und Kellerabteil",
-      "Einstellhallenplatz inklusive",
+      "2020 umfassend renoviert",
+      "Rund 128 m² Wohnfläche",
+      "Zentrale Lage im Dorfkern",
+      "Helle, grosszügige Räume",
+      "Moderne Küche",
+      "Schulen und ÖV in Gehdistanz",
     ],
   },
   {
-    slug: "attika-solothurn",
-    title: "Exklusive 2.5-Zimmer-Attikawohnung mit Terrasse",
-    type: "Attikawohnung",
+    // Homegate-Inserat 4003204506 — Angaben bitte gegen das Inserat prüfen.
+    slug: "wohnung-gallusstrasse-balsthal",
+    title: "Grosszügige 6.5-Zimmer-Wohnung mit Parkplatz",
+    type: "Wohnung",
     offer: "miete",
-    location: "Solothurn",
-    zip: "4500",
-    price: 1_980,
-    rooms: 2.5,
-    livingSpace: 71,
-    floor: "Attika (4. OG)",
-    yearBuilt: 2019,
-    available: "01.09.2026",
-    status: "Reserviert",
-    image: "/images/attika-solothurn.svg",
-    excerpt:
-      "Über den Dächern von Solothurn: lichtdurchflutete Attikawohnung mit 30 m² Dachterrasse und Weitblick.",
-    description: [
-      "Wohnen über den Dächern der schönsten Barockstadt der Schweiz: Diese lichtdurchflutete Attikawohnung besticht durch raumhohe Fensterfronten und eine grosszügige Dachterrasse von rund 30 m².",
-      "Der offene Wohnraum mit hochwertiger Küche geht nahtlos in den Aussenbereich über. Das Schlafzimmer verfügt über einen Einbauschrank; das Badezimmer ist mit Dusche und Badewanne ausgestattet.",
-      "Altstadt, Aare und Hauptbahnhof sind in wenigen Gehminuten erreichbar.",
-    ],
-    features: [
-      "Ca. 30 m² Dachterrasse mit Weitblick",
-      "Raumhohe Fensterfronten",
-      "Hochwertiger Innenausbau",
-      "Zentrale Lage nahe Altstadt",
-      "Lift direkt in die Wohnung",
-      "Einstellhallenplatz zumietbar",
-    ],
-  },
-  {
-    slug: "landhaus-muemliswil",
-    title: "Grosszügiges 6.5-Zimmer-Landhaus mit Umschwung",
-    type: "Einfamilienhaus",
-    offer: "kauf",
-    location: "Mümliswil",
-    zip: "4717",
-    price: 1_150_000,
+    location: "Balsthal",
+    zip: "4710",
+    address: "Gallusstrasse 15",
+    price: 1_370,
     rooms: 6.5,
-    livingSpace: 210,
-    plotSize: 1_240,
-    yearBuilt: 1986,
     available: "Nach Vereinbarung",
-    image: "/images/landhaus-muemliswil.svg",
+    image: "/images/haus-balsthal.svg",
+    sourceUrl: "https://www.homegate.ch/mieten/4003204506",
     excerpt:
-      "Idyllisches Landhaus im Naturpark Thal mit über 1'200 m² Umschwung, Doppelgarage und Panoramablick.",
+      "Viel Raum zum fairen Preis: grosszügige Wohnung an der Gallusstrasse 15 — Parkplatz in der Miete inbegriffen.",
     description: [
-      "Eingebettet in die sanfte Hügellandschaft des Naturparks Thal liegt dieses grosszügige Landhaus mit über 1'200 m² Umschwung und freiem Blick auf die Jurahöhen.",
-      "Das Haus wurde laufend unterhalten und bietet auf 210 m² Wohnfläche viel Raum für die ganze Familie: sechs Zimmer, zwei Nasszellen, eine grosse Wohnküche sowie ein separates Studio mit eigenem Eingang.",
-      "Der parkähnliche Garten mit altem Baumbestand, die Pergola und der Gartensitzplatz machen das Anwesen zu einem privaten Rückzugsort.",
+      "An der Gallusstrasse 15 in Balsthal vermieten wir diese grosszügige 6.5-Zimmer-Wohnung — ideal für alle, die viel Platz suchen, sei es als Familie, Wohngemeinschaft oder für Wohnen und Arbeiten unter einem Dach.",
+      "Die Wohnung besticht durch ihr ausgesprochen faires Preis-Leistungs-Verhältnis: Ein Parkplatz ist in der Miete bereits inbegriffen.",
+      "Das Quartier ist ruhig und familienfreundlich gelegen; das Zentrum von Balsthal mit Einkaufsmöglichkeiten und ÖV-Anschluss erreichen Sie in wenigen Gehminuten.",
     ],
     features: [
-      "Über 1'200 m² Umschwung",
-      "Separates Studio mit eigenem Eingang",
-      "Panoramablick auf die Jurahöhen",
-      "Doppelgarage und Werkstatt",
-      "Parkähnlicher Garten mit Pergola",
-      "Lage im Naturpark Thal",
+      "6.5 Zimmer — viel Raum zum fairen Preis",
+      "Parkplatz in der Miete inbegriffen",
+      "Auch als WG geeignet",
+      "Ruhiges, familienfreundliches Quartier",
+      "Zentrum in Gehdistanz",
+      "Balkon-/Gartensitzplatz-Zugang",
     ],
   },
   {
-    slug: "gewerbe-balsthal",
-    title: "Repräsentative Büro-/Gewerbefläche im Zentrum",
+    // Homegate-Inserat 4003202965 — Angaben bitte gegen das Inserat prüfen.
+    slug: "gewerbeflaeche-balsthal",
+    title: "Helle und moderne Gewerbefläche",
     type: "Gewerbe",
     offer: "miete",
     location: "Balsthal",
     zip: "4710",
-    price: 2_400,
-    rooms: 4,
-    livingSpace: 145,
-    floor: "1. Obergeschoss",
-    available: "Sofort",
+    address: "Gallusstrasse 2",
+    price: 2_650,
+    rooms: 4.5,
+    floor: "Zentrum",
+    available: "Nach Vereinbarung",
     image: "/images/gewerbe-balsthal.svg",
+    sourceUrl: "https://www.homegate.ch/mieten/4003202965",
     excerpt:
-      "Flexible Gewerbefläche mit 145 m² an zentraler Lage — ideal für Büro, Praxis oder Atelier.",
+      "Moderne, helle Gewerbefläche im Zentrum von Balsthal — ideal für Büro, Praxis, Atelier oder Dienstleistung.",
     description: [
-      "Im Zentrum von Balsthal vermieten wir diese repräsentative Gewerbefläche im 1. Obergeschoss eines gepflegten Geschäftshauses.",
-      "Die rund 145 m² lassen sich flexibel aufteilen und eignen sich für Büro-, Praxis- oder Ateliernutzung. Teeküche und zwei WC-Anlagen sind vorhanden; die Fläche wird auf Wunsch nach Mieterwunsch ausgebaut.",
-      "Kundenparkplätze befinden sich direkt vor dem Haus, die Bushaltestelle in unmittelbarer Nähe.",
+      "Im Zentrum von Balsthal vermieten wir diese helle und moderne Gewerbefläche — eine seltene Gelegenheit für Unternehmen, die Wert auf eine repräsentative Adresse mit guter Erreichbarkeit legen.",
+      "Die Räume sind hell und flexibel nutzbar: als Büro, Praxis, Atelier oder für Dienstleistungen mit Kundenverkehr. Die moderne Ausstattung erlaubt einen raschen Bezug ohne grossen Umbauaufwand.",
+      "Parkiermöglichkeiten und der öffentliche Verkehr befinden sich in unmittelbarer Nähe.",
     ],
     features: [
-      "Flexibel aufteilbare Fläche",
-      "Ausbau nach Mieterwunsch möglich",
-      "Teeküche und zwei WC-Anlagen",
-      "Kundenparkplätze vor dem Haus",
-      "Zentrale Lage mit ÖV-Anschluss",
-      "Sofort verfügbar",
+      "Helle, moderne Räume",
+      "Flexibel nutzbar (Büro, Praxis, Atelier)",
+      "Repräsentative Zentrumslage",
+      "Rascher Bezug möglich",
+      "Parkiermöglichkeiten in der Nähe",
+      "Guter ÖV-Anschluss",
     ],
   },
 ];
